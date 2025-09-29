@@ -5,9 +5,10 @@ PASSABLE_THRESHOLD=50
 MENU="(G)et a valid score\n(P)rint result\n(S)how stars\n(Q)uit"
 def main():
     """Run the program based on user's choice"""
+    score = -1 #-1 represent no score yet
+
     print(MENU)
     choice=input(">>>").upper()
-    score = -1 #-1 represent no score yet
     while choice != "Q":
         if choice == "G":
             score = get_valid_score()
