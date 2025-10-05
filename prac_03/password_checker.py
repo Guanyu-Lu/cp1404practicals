@@ -34,16 +34,13 @@ def get_valid_password():
 
 def is_valid_password(password):
     """Determine if the provided password is valid."""
-    number_of_lower, number_of_upper, number_of_digit, number_of_special=count_character_types(password)
-    if not verify_number_of_character(number_of_lower):
-        return False
-    if not verify_number_of_character(number_of_upper):
-        return False
-    if not verify_number_of_character(number_of_digit):
-        return False
-    if check_number_of_special_character(number_of_special):
-        return False
     if check_password_length(password):
+        return False
+    number_of_lower, number_of_upper, number_of_digit, number_of_special=count_character_types(password)
+    for character in [number_of_lower, number_of_upper, number_of_digit]:
+        if not verify_number_of_character(character):
+            return False
+    if check_number_of_special_character(number_of_special):
         return False
     return True
 
@@ -57,20 +54,16 @@ def check_password_length(password):
 
 def count_character_types(password):
     """Count the number of character types and return numbers of lower, upper, digit, special characters."""
-    counts = [0, 0, 0, 0] #index 0: lower, 1: upper, 2: digit, 3: special
+    number_of_lower,number_of_upper,number_of_digit,number_of_special=0,0,0,0
     for character in password:
         if character.isdigit():
-            counts[2] += 1
+            number_of_digit += 1
         elif character.isupper():
-            counts[1] += 1
+            number_of_upper += 1
         elif character.islower():
-            counts[0] += 1
+            number_of_lower += 1
         elif character in SPECIAL_CHARACTERS:
-            counts[3] += 1
-    number_of_lower = counts[0]
-    number_of_upper = counts[1]
-    number_of_digit = counts[2]
-    number_of_special =counts[3]
+            number_of_special += 1
     return number_of_lower,number_of_upper,number_of_digit,number_of_special
 
 def verify_number_of_character(count):

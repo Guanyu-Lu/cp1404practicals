@@ -5,18 +5,19 @@ with open("name.txt","w")as file:
 
 #2.
 with open("name.txt","r")as file:
-    name=file.read()
-    print(f"Hi,{name}!")
+    name=file.read().strip()
+print(f"Hi,{name}!")
 
 #3.
 with open("numbers.txt", "r") as file:
-    number1=int(file.readline())
-    number2=int(file.readline())
-print(number1+number2)
+    first_number=int(file.readline())
+    second_number=int(file.readline())
+print(first_number + second_number)
 
 #4.
-total = 0
+
 with open("numbers.txt","r") as file:
+    total=0
     for line in file:
         number=int(line.strip())
         total += number

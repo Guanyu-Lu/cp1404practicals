@@ -24,7 +24,7 @@ def main():
     with open(FILENAME, 'w') as out_file:
         print(f"Starting price: ${price:,.2f}", file=out_file)
         while MIN_PRICE <= price <= MAX_PRICE:
-            price_change = calculate_price_change()
+            price_change = get_price_change()
             price *= (1 + price_change)
             day += 1
             print(f"On day {day} price is： ${price:,.2f}")
@@ -36,8 +36,8 @@ def main():
     print(f"Price history has been saved to {FILENAME}")
 
 
-def calculate_price_change():
-    """Calculate price change """
+def get_price_change():
+    """Get price change """
     # generate a random integer of 1 or 2
     # if it's 1, the price increases, otherwise it decreases
     if random.randint(1, 2) == 1:
