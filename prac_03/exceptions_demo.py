@@ -2,10 +2,11 @@
 CP1404/CP5632 - Practical
 Answer the following questions:
 1. When will a ValueError occur?
-If we enter a string or float
+A ValueError will occur when the user enters text or input that cannot be successfully converted into an integer by the int() function.
 2. When will a ZeroDivisionError occur?
-if denominator is equal to 0
+when the denominator variable is equal to 0
 3. Could you change the code to avoid the possibility of a ZeroDivisionError?
+Yes,by using a loop to ensure the user provides a non-zero value for the denominator to avoid ZeroDivisionError.
 """
 
 def main():

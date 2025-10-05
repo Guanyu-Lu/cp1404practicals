@@ -24,13 +24,11 @@ def main():
     with open(FILENAME, 'w') as out_file:
         print(f"Starting price: ${price:,.2f}", file=out_file)
         while MIN_PRICE <= price <= MAX_PRICE:
-            # generate a random integer of 1 or 2
-            # if it's 1, the price increases, otherwise it decreases
             price_change = calculate_price_change()
             price *= (1 + price_change)
             day += 1
-            print(f"On day {day}, price is {price:,.2f}")
-            print(f"On day {day}, price is {price:,.2f}", file=out_file)
+            print(f"On day {day} price is： ${price:,.2f}")
+            print(f"On day {day} price is： ${price:,.2f}", file=out_file)
     if price > MAX_PRICE:
         print(f"Price reached the maximum of ${MAX_PRICE:,.2f} on day {day}.")
     else:
@@ -40,6 +38,8 @@ def main():
 
 def calculate_price_change():
     """Calculate price change """
+    # generate a random integer of 1 or 2
+    # if it's 1, the price increases, otherwise it decreases
     if random.randint(1, 2) == 1:
         # generate a random floating-point number
         # between 0 and MAX_INCREASE

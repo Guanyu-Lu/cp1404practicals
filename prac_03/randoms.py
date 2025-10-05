@@ -12,13 +12,13 @@ print(random.uniform(2.5, 5.5))  # line 3
 
 
 #What did you see on line 2?
-#It generates a number  starting from 3 and increasing by 2 until (but not including) 10.
+#It generates a sequence of numbers starting from 3, with a step = 2, up to (but not including) 10. The possible values are 3, 5, 7, 9.
 
 #What was the smallest number you could have seen, what was the largest?
 #3 is smallest number and 9 is largest number
 
 #Could line 2 have produced a 4?
-#No,because step=2. 3+2=5>4
+#No. Because the step size is 2, starting from 3, the next number is 5, so it will never be 4.
 
 
 
