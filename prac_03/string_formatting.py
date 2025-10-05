@@ -5,7 +5,8 @@ Various examples of using Python string formatting.
 Want to read more about it?
 https://docs.python.org/3/library/string.html#formatstrings
 """
-
+INITIAL_VALUE=0
+FINAL_VALUE=10
 name = "Gibson L-5 CES"
 year = 1922
 cost = 16035.9
@@ -36,7 +37,7 @@ print(f"{year} {name} for about ${cost:,.0f}! ")
 # 1922 Gibson L-5 CES for about $16,036!
 
 # produce the following right-aligned output (DO NOT use a list):
-for number in range(0,11):
+for number in range(INITIAL_VALUE,FINAL_VALUE+1):
     print(f"2 ^{number:2} is {2**number:4}")
 # 2 ^ 0 is    1
 # 2 ^ 1 is    2
