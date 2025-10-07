@@ -12,11 +12,11 @@ def get_integer(prompt):
     is_integer=False
     while not is_integer:
         try:
-            number_of_quick_picks=int(input(prompt))
+            valid_number=int(input(prompt))
             is_integer=True
         except ValueError:
             print("Please enter a integer.")
-    return number_of_quick_picks
+    return valid_number
 
 def get_valid_picks():
     """Get number of quick picks and ensure it is a positive integer."""
