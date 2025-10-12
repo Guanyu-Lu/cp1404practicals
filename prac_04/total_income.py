@@ -42,7 +42,7 @@ def get_valid_incomes(month):
             else:
                 print("Please enter a positive float.")
         except ValueError:
-            print("Please enter an float.")
+            print("Please enter a float.")
     return income
 
 def print_report(incomes):

@@ -4,27 +4,22 @@ MAXIMUM_VALUE = 45
 NUMBERS_PER_PICK = 6
 def main():
     """Get number of quick picks and print quick picks"""
-    number_of_quick_picks = get_valid_picks()
+    number_of_quick_picks = get_valid_integer("How many quick picks? ")
     print_quick_picks(number_of_quick_picks)
 
-def get_integer(prompt):
+def get_valid_integer(prompt):
     """Get an integer instead of a string or float."""
     is_integer=False
     while not is_integer:
         try:
             valid_number=int(input(prompt))
-            is_integer=True
+            if valid_number > 0:
+                is_integer=True
+            else:
+                print("Please enter an positive integer.")
         except ValueError:
             print("Please enter a integer.")
     return valid_number
-
-def get_valid_picks():
-    """Get number of quick picks and ensure it is a positive integer."""
-    number_of_quick_picks = get_integer("How many quick picks? ")
-    while number_of_quick_picks <= 0:
-        print("Please enter a positive integer")
-        number_of_quick_picks=get_integer("How many quick picks? ")
-    return number_of_quick_picks
 
 def generate_pick_number(numbers):
     """Generate a unique random number and add to the list."""
