@@ -15,11 +15,14 @@ CODE_TO_NAME = {
     "SA": "South Australia",
 }
 print(CODE_TO_NAME)
-
-state_code = input("Enter short state: ")
+abbreviation_width=max(len(abbreviation) for abbreviation in CODE_TO_NAME.keys())
+name_width=max(len(name) for name in CODE_TO_NAME.values())
+for abbreviation,name in CODE_TO_NAME.items():
+    print(f"{abbreviation:{abbreviation_width}} is {name:{name_width}}")
+state_code = input("Enter short state: ").upper()
 while state_code != "":
-    if state_code in CODE_TO_NAME:
+    try:
         print(state_code, "is", CODE_TO_NAME[state_code])
-    else:
+    except KeyError:
         print("Invalid short state")
-    state_code = input("Enter short state: ")
+    state_code = input("Enter short state: ").upper()
