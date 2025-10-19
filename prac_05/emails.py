@@ -20,7 +20,7 @@ def main():
     print_emails(email_to_name)
 
 
-def extract_name(email: str) -> str:
+def extract_name(email):
     """Exact name from email address"""
     name=email.split("@")[0]
     name=name.replace("."," ").replace("_", " ")
