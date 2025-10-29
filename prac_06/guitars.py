@@ -1,0 +1,73 @@
+"""
+Module"Guitars!"
+Estimate: 40 minutes
+Actual:   35 minutes
+"""
+from prac_06.guitar import Guitar
+def main():
+    """Run the Guitar information program."""
+    print("My guitar!")
+    guitars=get_valid_information()
+    print()
+    if len(guitars)==0:
+        print("No guitars!")
+    else:
+        cost_width, name_width = calculate_display_width(guitars)
+        display_guitars(cost_width, guitars, name_width)
+
+
+def calculate_display_width(guitars):
+    """Calculate the maximum widths needed for name and cost."""
+    name_width = max(len(guitar.name) for guitar in guitars)
+    maximum_cost= max(guitar.cost for guitar in guitars)
+    cost_width=len(f"{maximum_cost:,.2f}")
+    return cost_width, name_width
+
+
+def get_valid_information():
+    """Get valid information including name, year and cost for Guitars."""
+    guitars=[]
+    guitar_name = input("Name: ")
+    while len(guitar_name) != 0:
+        guitar_year = get_valid_integer("Year: ")
+        guitar_cost = get_valid_float("Cost: $")
+        guitars.append(Guitar(guitar_name, guitar_year, guitar_cost))
+        print(f"{guitar_name} ({guitar_year}) : ${guitar_cost:,.2f} added.")
+        print()
+        guitar_name = input("Name: ")
+    return guitars
+
+def display_guitars(cost_width, guitars, name_width):
+    """Display guitars information in list."""
+    print("... snip ...")
+    print()
+    print("These are my guitars:")
+    for i, guitar in enumerate(guitars, 1):
+        vintage_string = " (vintage)" if guitar.is_vintage() else ""
+        print(
+            f"Guitar {i}: {guitar.name:>{name_width}} ({guitar.year}), worth $ {guitar.cost:{cost_width},.2f}{vintage_string}")
+
+
+def get_valid_integer(prompt):
+    """Get a valid integer input from the user."""
+    is_integer=False
+    while not is_integer:
+        try:
+            number=int(input(prompt))
+            is_integer=True
+        except ValueError:
+            print(f"{prompt} is not a valid integer. Try again.")
+    return number
+
+def get_valid_float(prompt):
+    """Get a valid float input from the user."""
+    is_float=False
+    while not is_float:
+        try:
+            number=float(input(prompt))
+            is_float=True
+        except ValueError:
+            print(f"{prompt} is not a valid float. Try again.")
+    return number
+
+main()
