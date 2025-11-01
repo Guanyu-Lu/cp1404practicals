@@ -33,8 +33,8 @@ def get_valid_data():
     guitars=[]
     guitar_name = input("Name: ")
     while len(guitar_name) != 0:
-        guitar_year = get_valid_integer("Year: ")
-        guitar_cost = get_valid_float("Cost: $")
+        guitar_year = get_valid_integer("Year: ",int)
+        guitar_cost = get_valid_integer("Cost: $",float)
         guitars.append(Guitar(guitar_name, guitar_year, guitar_cost))
         print(f"{guitar_name} ({guitar_year}) : ${guitar_cost:,.2f} added.")
         print()
@@ -51,26 +51,16 @@ def display_guitars(cost_width, guitars, name_width):
         print(f"Guitar {i}:  {guitar.name:>{name_width}} ({guitar.year:{YEAR_WIDTH}}), worth $ {guitar.cost:{cost_width},.2f}{vintage_string}")
 
 
-def get_valid_integer(prompt):
-    """Get a valid integer input from the user."""
-    is_integer=False
-    while not is_integer:
+def get_valid_integer(prompt,number_type):
+    """Get a valid number input from the user."""
+    is_valid=False
+    while not is_valid:
         try:
-            number=int(input(prompt))
-            is_integer=True
+            number=number_type(input(prompt))
+            is_valid=True
         except ValueError:
-            print("You should input a valid integer. Try again.")
+            print("Invalid input. Try again.")
     return number
 
-def get_valid_float(prompt):
-    """Get a valid float input from the user."""
-    is_float=False
-    while not is_float:
-        try:
-            number=float(input(prompt))
-            is_float=True
-        except ValueError:
-            print("You should input a valid float. Try again.")
-    return number
 
 main()
