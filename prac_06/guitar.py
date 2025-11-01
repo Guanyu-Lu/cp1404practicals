@@ -4,8 +4,10 @@ Estimate: 10 minutes
 Actual:   8 minutes
 """
 
-CURRENT_YEAR=2025
+CURRENT_YEAR = 2025
 class Guitar:
+    """Represent a guitar with name, manufacturing year and cost."""
+
     def __init__(self,name="", year=0, cost=0):
         """Initialise a Guitar instance.
         name: string, name of the guitar
@@ -17,7 +19,7 @@ class Guitar:
         self.cost=cost
 
     def __str__(self):
-        """Return a string representation of the guitar."""
+        """Return a formatted string representation of the guitar."""
         return f"{self.name}({self.year}): ${self.cost:,2f}"
 
     def get_age(self):
