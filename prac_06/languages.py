@@ -1,8 +1,9 @@
 """
-Module"Languages"
-Estimate: 30 minutes
-Actual:   23 minutes
+Languages
+Estimate: 20 minutes
+Actual:   16 minutes
 """
+
 from prac_06.programming_language import ProgrammingLanguage
 def main():
     """Create a list of languages, print them out, and identify the languages with dynamic typing"""
@@ -15,7 +16,10 @@ def main():
     program_languages =[ProgrammingLanguage("Python", "Dynamic", True, 1991),
                         ProgrammingLanguage("Ruby", "Dynamic", True, 1995),
                         ProgrammingLanguage("Visual Basic", "Static", False, 1991)]
-    dynamical_languages=[language for language in program_languages if language.is_dynamic()]
     print("The dynamically typed languages are:")
-    for language in dynamical_languages:
-        print(language.name)
+    for language in program_languages:
+        if language.is_dynamic():
+            print(language.name)
+
+
+main()
