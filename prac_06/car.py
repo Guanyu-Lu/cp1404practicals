@@ -2,7 +2,7 @@
 
 
 class Car:
-    """Represent a Car object."""
+    """Represent a car with fuel (units) and odometer (km driven)."""
 
     def __init__(self, name="Car", fuel=0):
         """Initialise a Car instance.
@@ -32,5 +32,5 @@ class Car:
         return distance
 
     def __str__(self):
-        """Display the car's name, fuel and odometer."""
+        """Return formatted string including car's name, fuel and odometer."""
         return f"{self.name} has {self.fuel} units of fuel and its odometer is {self._odometer}km."
