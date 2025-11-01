@@ -33,13 +33,13 @@ def get_valid_data():
     guitars=[]
     guitar_name = input("Name: ")
     while len(guitar_name) != 0:
-        guitar_year = get_valid_integer("Year: ",int)
-        guitar_cost = get_valid_integer("Cost: $",float)
+        guitar_year = get_valid_input("Year: ",int)
+        guitar_cost = get_valid_input("Cost: $",float)
         guitars.append(Guitar(guitar_name, guitar_year, guitar_cost))
-        print(f"{guitar_name} ({guitar_year}) : ${guitar_cost:,.2f} added.")
-        print()
+        print(f"{guitar_name} ({guitar_year}) : ${guitar_cost:,.2f} added.\n")
         guitar_name = input("Name: ")
     return guitars
+
 
 def display_guitars(cost_width, guitars, name_width):
     """Display guitars information in list."""
@@ -48,11 +48,12 @@ def display_guitars(cost_width, guitars, name_width):
     print("These are my guitars:")
     for i, guitar in enumerate(guitars, 1):
         vintage_string = " (vintage)" if guitar.is_vintage() else ""
-        print(f"Guitar {i}:  {guitar.name:>{name_width}} ({guitar.year:{YEAR_WIDTH}}), worth $ {guitar.cost:{cost_width},.2f}{vintage_string}")
+        print(f"Guitar {i}:  {guitar.name:>{name_width}} ({guitar.year:{YEAR_WIDTH}}), "
+              f"worth $ {guitar.cost:{cost_width},.2f}{vintage_string}")
 
 
-def get_valid_integer(prompt,number_type):
-    """Get a valid number input from the user."""
+def get_valid_input(prompt,number_type):
+    """Get a valid input from the user."""
     is_valid=False
     while not is_valid:
         try:
