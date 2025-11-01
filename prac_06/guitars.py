@@ -1,12 +1,16 @@
 """
 Module"Guitars!"
-Estimate: 40 minutes
-Actual:   35 minutes
+Estimate: 20 minutes
+Actual:   21 minutes
 """
+
 from prac_06.guitar import Guitar
+YEAR_WIDTH=4
+
+
 def main():
     """Run the Guitar information program."""
-    print("My guitar!")
+    print("My guitars!")
     guitars=get_valid_information()
     print()
     if len(guitars)==0:
@@ -44,8 +48,7 @@ def display_guitars(cost_width, guitars, name_width):
     print("These are my guitars:")
     for i, guitar in enumerate(guitars, 1):
         vintage_string = " (vintage)" if guitar.is_vintage() else ""
-        print(
-            f"Guitar {i}: {guitar.name:>{name_width}} ({guitar.year}), worth $ {guitar.cost:{cost_width},.2f}{vintage_string}")
+        print(f"Guitar {i}:  {guitar.name:>{name_width}} ({guitar.year:{YEAR_WIDTH}}), worth $ {guitar.cost:{cost_width},.2f}{vintage_string}")
 
 
 def get_valid_integer(prompt):
