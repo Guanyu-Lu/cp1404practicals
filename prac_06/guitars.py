@@ -59,7 +59,7 @@ def get_valid_integer(prompt):
             number=int(input(prompt))
             is_integer=True
         except ValueError:
-            print(f"{prompt} is not a valid integer. Try again.")
+            print("You should input a valid integer. Try again.")
     return number
 
 def get_valid_float(prompt):
@@ -70,7 +70,7 @@ def get_valid_float(prompt):
             number=float(input(prompt))
             is_float=True
         except ValueError:
-            print(f"{prompt} is not a valid float. Try again.")
+            print("You should input a valid float. Try again.")
     return number
 
 main()
