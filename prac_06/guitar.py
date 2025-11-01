@@ -1,11 +1,16 @@
+"""
+guitar_test
+Estimate: 10 minutes
+Actual:   8 minutes
+"""
+
 CURRENT_YEAR=2025
 class Guitar:
     def __init__(self,name="", year=0, cost=0):
-        """
-        Initialise a Guitar instance.
-               name: string, name of the guitar
-               year: integer, The year of guitar making
-               cost: float, the cost of the guitar
+        """Initialise a Guitar instance.
+        name: string, name of the guitar
+        year: integer, The year of guitar making
+        cost: float, the cost of the guitar
         """
         self.name=name
         self.year=year
