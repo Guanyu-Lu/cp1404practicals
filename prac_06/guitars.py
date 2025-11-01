@@ -9,9 +9,9 @@ YEAR_WIDTH=4
 
 
 def main():
-    """Run the Guitar information program."""
+    """Run the Guitar program."""
     print("My guitars!")
-    guitars=get_valid_information()
+    guitars=get_valid_data()
     print()
     if len(guitars)==0:
         print("No guitars!")
@@ -28,8 +28,8 @@ def calculate_display_width(guitars):
     return cost_width, name_width
 
 
-def get_valid_information():
-    """Get valid information including name, year and cost for Guitars."""
+def get_valid_data():
+    """Get valid data including name, year and cost for Guitars."""
     guitars=[]
     guitar_name = input("Name: ")
     while len(guitar_name) != 0:
