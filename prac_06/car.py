@@ -33,4 +33,4 @@ class Car:
 
     def __str__(self):
         """Display the car's name, fuel and odometer."""
-        return f"{self.name}, fuel={self.fuel}, odometer={self._odometer}"
+        return f"{self.name} has {self.fuel} units of fuel and its odometer is {self._odometer}km."
