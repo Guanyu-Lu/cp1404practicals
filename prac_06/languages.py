@@ -13,9 +13,7 @@ def main():
     print(python)
     print(ruby)
     print(visual_basic)
-    program_languages =[ProgrammingLanguage("Python", "Dynamic", True, 1991),
-                        ProgrammingLanguage("Ruby", "Dynamic", True, 1995),
-                        ProgrammingLanguage("Visual Basic", "Static", False, 1991)]
+    program_languages =[python,ruby,visual_basic]
     for language in program_languages:
         print(language)
     print("The dynamically typed languages are:")
