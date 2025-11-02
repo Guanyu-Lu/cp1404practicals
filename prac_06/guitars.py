@@ -1,5 +1,5 @@
 """
-Module"Guitars!"
+Guitars
 Estimate: 20 minutes
 Actual:   21 minutes
 """
