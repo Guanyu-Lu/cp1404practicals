@@ -15,6 +15,13 @@ MENU="""
 - (A)dd new project  
 - (U)pdate project
 - (Q)uit"""
+NAME_INDEX=0
+DATE_INDEX=1
+PRIORITY_INDEX=2
+COST_INDEX=3
+COMPLETED_PERCENTAGE_INDEX=4
+DATA_LENGTH=5
+
 
 def main():
     print("Welcome to Pythonic Project Management")
@@ -49,10 +56,10 @@ def load_data(filename):
             in_file.readline()
             for line in in_file:
                 parts = line.strip().split('\t')
-                if len(parts)==5:
-                    date_string=parts[1]
+                if len(parts)==DATA_LENGTH:
+                    date_string=parts[DATE_INDEX]
                     date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
-                    projects.append(Project(parts[0],date,int(parts[2]),float(parts[3]),int(parts[4])))
+                    projects.append(Project(parts[NAME_INDEX],date,int(parts[PRIORITY_INDEX]),float(parts[COST_INDEX]),int(parts[COMPLETED_PERCENTAGE_INDEX])))
     except FileNotFoundError:
         print(f"Sorry,{filename} not found.")
     print(f"Loaded {len(projects)} projects from {filename}")
