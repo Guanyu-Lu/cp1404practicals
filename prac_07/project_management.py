@@ -82,36 +82,39 @@ def update_projects(projects):
     project_choice=get_valid_input("Project choice:",int)
     if not project_choice <0 or project_choice >= len(projects):
         print(projects[project_choice])
-        new_percentage=get_valid_input("New percentage:",int)
-        while new_percentage<0 or new_percentage>100:
-            print("Invalid percentage, please try again.")
-            new_percentage=get_valid_input("New percentage:",int)
-        new_priority=get_valid_input("New priority:",int)
-        while new_priority<0 or new_priority>100:
-            print("Invalid priority, please try again.")
-            new_priority=get_valid_input("New priority:",int)
+        new_percentage = get_valid_value("new percentage",0,100,int)
+        new_priority=get_valid_value("new priority",0,100,int)
         projects[project_choice].completed_percentage,projects[project_choice].priority = new_percentage,new_priority
     else:
         print("Invalid project number.")
+
+
+def get_valid_value(prompt,min_value,max_value,number_type):
+    value = get_valid_input(prompt,number_type)
+    while value < min_value or value > max_value:
+        print(f"Invalid {prompt}, please try again.")
+        value = get_valid_input(prompt, int)
+    return value
+
 
 def add_new_projects(projects):
     print("Let's add a new project")
     name=input("Name:")
     start_date_string=input("Start date (dd/mm/yy):")
-    priority=get_valid_input("Priority:",int)
-    while priority < 0 or priority > 100:
-        print("Invalid priority, please try again.")
-        priority = get_valid_input("Priority:", int)
-    estimate_cost=get_valid_input("Cost estimate: $",float)
-    while estimate_cost<0:
-        print("Invalid estimate_cost, please try again.")
-        estimate_cost = get_valid_input("Cost estimate:", float)
-    completed_percentage=get_valid_input("Percent complete:",int)
-    while completed_percentage<0 or completed_percentage>100:
-        print("Invalid percentage, please try again.")
-        completed_percentage = get_valid_input("Percent complete:", int)
+    priority=get_valid_value("priority",0,100,int)
+    estimate_cost = get_valid_estmated_cost()
+    completed_percentage=get_valid_value("Percent complete:",0,100,int)
     start_date = datetime.datetime.strptime(start_date_string, "%d/%m/%Y").date()
     projects.append(Project(name,start_date,priority,estimate_cost,completed_percentage))
+
+
+def get_valid_estmated_cost():
+    estimate_cost = get_valid_input("Cost estimate: $", float)
+    while estimate_cost < 0:
+        print("Invalid estimate_cost, please try again.")
+        estimate_cost = get_valid_input("Cost estimate:", float)
+    return estimate_cost
+
 
 def filter_project(projects):
     filer_date_string=input("Show projects that start after date (dd/mm/yy):")
@@ -136,7 +139,7 @@ def get_valid_input(prompt,number_type):
     is_valid=False
     while not is_valid:
         try:
-            number=number_type(input(prompt))
+            number=number_type(input(f"{prompt.title()}:"))
             is_valid=True
         except ValueError:
             print("Invalid input. Try again.")
