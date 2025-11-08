@@ -23,6 +23,8 @@ def main():
     while choice != 'Q':
         if choice == "D":
             display_projects(projects)
+        elif choice == "U":
+            update_projects(projects)
         choice = input(f"{MENU}\n>>>").upper()
 
 def load_data():
@@ -42,15 +44,27 @@ def load_data():
     return projects
 
 def display_projects(projects):
-    projects.sort()
     incompleted_projects=[project for project in projects if project.completed_percentage < 100]
     completed_projects=[project for project in projects if project.completed_percentage == 100]
+    incompleted_projects.sort()
+    completed_projects.sort()
     print("Incomplete projects: ")
     for project in incompleted_projects:
         print(f"\t{project}")
     print("Completed projects: ")
     for project in completed_projects:
         print(f"\t{project}")
+
+def update_projects(projects):
+    for i,project in enumerate(projects,0):
+        print(f"{i} {project}")
+    project_choice=int(input("Project choice:"))
+    if not project_choice <0 or project_choice >= len(projects):
+        print(projects[project_choice])
+        new_percentage=int(input("New percentage:"))
+        new_priority=int(input("New priority:"))
+        projects[project_choice].completed_percentage,projects[project_choice].priority = new_percentage,new_priority
+
 main()
 
 
