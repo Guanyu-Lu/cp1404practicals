@@ -25,6 +25,8 @@ def main():
             display_projects(projects)
         elif choice == "U":
             update_projects(projects)
+        elif choice == "A":
+            add_new_projects(projects)
         choice = input(f"{MENU}\n>>>").upper()
 
 def load_data():
@@ -64,6 +66,16 @@ def update_projects(projects):
         new_percentage=int(input("New percentage:"))
         new_priority=int(input("New priority:"))
         projects[project_choice].completed_percentage,projects[project_choice].priority = new_percentage,new_priority
+
+def add_new_projects(projects):
+    print("Let's add a new project")
+    name=input("Name:")
+    start_date=input("Start date (dd/mm/yy):")
+    priority=int(input("Priority:"))
+    estimate_cost=int(input("Cost estimate: $"))
+    completed_percentage=int(input("Percent complete:"))
+    date = datetime.datetime.strptime(start_date, "%d/%m/%Y").date()
+    projects.append(Project(name,date,priority,estimate_cost,completed_percentage))
 
 main()
 
