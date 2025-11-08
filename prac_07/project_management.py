@@ -21,8 +21,12 @@ PRIORITY_INDEX=2
 COST_INDEX=3
 COMPLETED_PERCENTAGE_INDEX=4
 DATA_LENGTH=5
+MINIMUM_VALUE=0
+MAXIMUM_VALUE=100
+DATE_FORMAT = "%d/%m/%Y"
 
 def main():
+    """Run the Project Management Program, loading and saving data."""
     print("Welcome to Pythonic Project Management")
     projects=load_data(FILENAME)
     choice=input(f"{MENU}\n>>>").upper()
@@ -49,15 +53,16 @@ def main():
     print("Thank you for using custom-built project management software.")
 
 def load_data(filename):
+    """Load project data from the file, returning a list of Project objects."""
     projects = []
     try:
         with open(filename,"r") as in_file:
-            in_file.readline()
+            in_file.readline()  # Skip header line
             for line in in_file:
                 parts = line.strip().split('\t')
                 if len(parts)==DATA_LENGTH:
                     date_string=parts[DATE_INDEX]
-                    date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
+                    date = datetime.datetime.strptime(date_string, DATE_FORMAT).date()
                     projects.append(Project(parts[NAME_INDEX],date,int(parts[PRIORITY_INDEX]),float(parts[COST_INDEX]),int(parts[COMPLETED_PERCENTAGE_INDEX])))
     except FileNotFoundError:
         print(f"Sorry,{filename} not found.")
@@ -65,6 +70,7 @@ def load_data(filename):
     return projects
 
 def display_projects(projects):
+    """Display incomplete and completed projects, sorted by priority."""
     incompleted_projects=[project for project in projects if project.completed_percentage < 100]
     completed_projects=[project for project in projects if project.completed_percentage == 100]
     incompleted_projects.sort()
@@ -77,53 +83,59 @@ def display_projects(projects):
         print(f"\t{project}")
 
 def update_projects(projects):
+    """Select a project and update its completion percentage and priority."""
     for i,project in enumerate(projects,0):
         print(f"{i} {project}")
-    project_choice=get_valid_input("Project choice:",int)
+    project_choice=get_valid_number("Project choice:",int)
     if not project_choice <0 or project_choice >= len(projects):
         print(projects[project_choice])
-        new_percentage = get_valid_value("new percentage",0,100,int)
-        new_priority=get_valid_value("new priority",0,100,int)
+        new_percentage = get_valid_value("new percentage",int)
+        new_priority=get_valid_value("new priority",int)
         projects[project_choice].completed_percentage,projects[project_choice].priority = new_percentage,new_priority
     else:
         print("Invalid project number.")
 
 
-def get_valid_value(prompt,min_value,max_value,number_type):
-    value = get_valid_input(prompt,number_type)
-    while value < min_value or value > max_value:
+def get_valid_value(prompt,number_type):
+    """Get a valid value."""
+    value = get_valid_number(prompt,number_type)
+    while value < MINIMUM_VALUE or value > MAXIMUM_VALUE:
         print(f"Invalid {prompt}, please try again.")
-        value = get_valid_input(prompt, int)
+        value = get_valid_number(prompt, int)
     return value
 
 
 def add_new_projects(projects):
+    """Add a new project to the list based on user input."""
     print("Let's add a new project")
     name=input("Name:")
     start_date_string=input("Start date (dd/mm/yy):")
-    priority=get_valid_value("priority",0,100,int)
-    estimate_cost = get_valid_estmated_cost()
-    completed_percentage=get_valid_value("Percent complete:",0,100,int)
-    start_date = datetime.datetime.strptime(start_date_string, "%d/%m/%Y").date()
+    priority=get_valid_value("priority",int)
+    estimate_cost = get_valid_estimated_cost()
+    completed_percentage=get_valid_value("Percent complete:",int)
+    start_date = datetime.datetime.strptime(start_date_string, DATE_FORMAT).date()
     projects.append(Project(name,start_date,priority,estimate_cost,completed_percentage))
 
 
-def get_valid_estmated_cost():
-    estimate_cost = get_valid_input("Cost estimate: $", float)
+def get_valid_estimated_cost():
+    """Get a valid estimated cost."""
+    estimate_cost = get_valid_number("Cost estimate: $", float)
     while estimate_cost < 0:
         print("Invalid estimate_cost, please try again.")
-        estimate_cost = get_valid_input("Cost estimate:", float)
+        estimate_cost = get_valid_number("Cost estimate:", float)
     return estimate_cost
 
 
 def filter_project(projects):
+    """Filter and display projects starting on or after a specified date."""
     filer_date_string=input("Show projects that start after date (dd/mm/yy):")
-    filer_date = datetime.datetime.strptime(filer_date_string, "%d/%m/%Y").date()
+    filer_date = datetime.datetime.strptime(filer_date_string, DATE_FORMAT).date()
     filter_dates=[project for project in projects if project.start_date >= filer_date]
     for project in filter_dates:
         print(project)
 
 def save_projects(projects):
+    """Save all projects to a file"""
     filename=input("Please enter filename to save the projects:")
     if len(filename.strip()) == 0:
         filename=FILENAME
@@ -134,8 +146,8 @@ def save_projects(projects):
                             str(project.estimate_cost),str(project.completed_percentage)]),file=out_file)
     print(f"{len(projects)} projects have been saved to {filename}.")
 
-def get_valid_input(prompt,number_type):
-    """Get a valid input from the user."""
+def get_valid_number(prompt,number_type):
+    """Get a valid number from the user."""
     is_valid=False
     while not is_valid:
         try:
