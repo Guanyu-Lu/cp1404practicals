@@ -11,4 +11,11 @@ class Project:
         self.estimate_cost=estimate_cost
         self.completed_percentage=completed_percentage
 
+    def __str__(self):
+        return (f"{self.name}, start:{self.start_date}, "
+                f"priority {self.priority}, estimate: ${self.estimate_cost:2f}, "
+                f"completed_percentage {self.completed_percentage}")
+
+    def __lt__(self, other):
+        return self.priority < other.priority
 
