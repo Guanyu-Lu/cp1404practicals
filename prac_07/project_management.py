@@ -3,9 +3,9 @@ Project Management
 Estimate: 100 minutes
 Actual:    minutes
 """
-#from operator import itemgetter
 from prac_07.project import Project
 import datetime
+
 FILENAME = 'projects.txt'
 MENU="""
 - (L)oad projects  
@@ -21,7 +21,6 @@ PRIORITY_INDEX=2
 COST_INDEX=3
 COMPLETED_PERCENTAGE_INDEX=4
 DATA_LENGTH=5
-
 
 def main():
     print("Welcome to Pythonic Project Management")
@@ -80,20 +79,37 @@ def display_projects(projects):
 def update_projects(projects):
     for i,project in enumerate(projects,0):
         print(f"{i} {project}")
-    project_choice=int(input("Project choice:"))
+    project_choice=get_valid_input("Project choice:",int)
     if not project_choice <0 or project_choice >= len(projects):
         print(projects[project_choice])
-        new_percentage=int(input("New percentage:"))
-        new_priority=int(input("New priority:"))
+        new_percentage=get_valid_input("New percentage:",int)
+        while new_percentage<0 or new_percentage>100:
+            print("Invalid percentage, please try again.")
+            new_percentage=get_valid_input("New percentage:",int)
+        new_priority=get_valid_input("New priority:",int)
+        while new_priority<0 or new_priority>100:
+            print("Invalid priority, please try again.")
+            new_priority=get_valid_input("New priority:",int)
         projects[project_choice].completed_percentage,projects[project_choice].priority = new_percentage,new_priority
+    else:
+        print("Invalid project number.")
 
 def add_new_projects(projects):
     print("Let's add a new project")
     name=input("Name:")
     start_date_string=input("Start date (dd/mm/yy):")
-    priority=int(input("Priority:"))
-    estimate_cost=int(input("Cost estimate: $"))
-    completed_percentage=int(input("Percent complete:"))
+    priority=get_valid_input("Priority:",int)
+    while priority < 0 or priority > 100:
+        print("Invalid priority, please try again.")
+        priority = get_valid_input("Priority:", int)
+    estimate_cost=get_valid_input("Cost estimate: $",float)
+    while estimate_cost<0:
+        print("Invalid estimate_cost, please try again.")
+        estimate_cost = get_valid_input("Cost estimate:", float)
+    completed_percentage=get_valid_input("Percent complete:",int)
+    while completed_percentage<0 or completed_percentage>100:
+        print("Invalid percentage, please try again.")
+        completed_percentage = get_valid_input("Percent complete:", int)
     start_date = datetime.datetime.strptime(start_date_string, "%d/%m/%Y").date()
     projects.append(Project(name,start_date,priority,estimate_cost,completed_percentage))
 
@@ -114,6 +130,18 @@ def save_projects(projects):
             print(",".join([project.name,str(project.start_date),str(project.priority),
                             str(project.estimate_cost),str(project.completed_percentage)]),file=out_file)
     print(f"{len(projects)} projects have been saved to {filename}.")
+
+def get_valid_input(prompt,number_type):
+    """Get a valid input from the user."""
+    is_valid=False
+    while not is_valid:
+        try:
+            number=number_type(input(prompt))
+            is_valid=True
+        except ValueError:
+            print("Invalid input. Try again.")
+    return number
+
 main()
 
 
