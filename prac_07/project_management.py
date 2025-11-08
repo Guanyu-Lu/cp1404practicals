@@ -27,6 +27,8 @@ def main():
             update_projects(projects)
         elif choice == "A":
             add_new_projects(projects)
+        elif choice == "F":
+            filter_project(projects)
         choice = input(f"{MENU}\n>>>").upper()
 
 def load_data():
@@ -70,12 +72,19 @@ def update_projects(projects):
 def add_new_projects(projects):
     print("Let's add a new project")
     name=input("Name:")
-    start_date=input("Start date (dd/mm/yy):")
+    start_date_string=input("Start date (dd/mm/yy):")
     priority=int(input("Priority:"))
     estimate_cost=int(input("Cost estimate: $"))
     completed_percentage=int(input("Percent complete:"))
-    date = datetime.datetime.strptime(start_date, "%d/%m/%Y").date()
-    projects.append(Project(name,date,priority,estimate_cost,completed_percentage))
+    start_date = datetime.datetime.strptime(start_date_string, "%d/%m/%Y").date()
+    projects.append(Project(name,start_date,priority,estimate_cost,completed_percentage))
+
+def filter_project(projects):
+    filer_date_string=input("Show projects that start after date (dd/mm/yy):")
+    filer_date = datetime.datetime.strptime(filer_date_string, "%d/%m/%Y").date()
+    filter_dates=[project for project in projects if project.start_date >= filer_date]
+    for project in filter_dates:
+        print(project)
 
 main()
 
