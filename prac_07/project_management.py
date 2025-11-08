@@ -18,10 +18,13 @@ MENU="""
 
 def main():
     print("Welcome to Pythonic Project Management")
-    projects=load_data()
+    projects=load_data(FILENAME)
     choice=input(f"{MENU}\n>>>").upper()
     while choice != 'Q':
-        if choice == "D":
+        if choice == 'L':
+            filename = input("Please enter filename:")
+            projects=load_data(filename)
+        elif choice == "D":
             display_projects(projects)
         elif choice == "U":
             update_projects(projects)
@@ -29,12 +32,20 @@ def main():
             add_new_projects(projects)
         elif choice == "F":
             filter_project(projects)
+        elif choice == "S":
+            save_projects(projects)
+        else:
+            print("Invalid choice, please try again.")
         choice = input(f"{MENU}\n>>>").upper()
+    save_choice=input(f"Would you like to save to {FILENAME}?").upper()
+    if save_choice == 'Y':
+        save_projects(projects)
+    print("Thank you for using custom-built project management software.")
 
-def load_data():
+def load_data(filename):
     projects = []
     try:
-        with open(FILENAME,"r") as in_file:
+        with open(filename,"r") as in_file:
             in_file.readline()
             for line in in_file:
                 parts = line.strip().split('\t')
@@ -43,8 +54,8 @@ def load_data():
                     date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
                     projects.append(Project(parts[0],date,int(parts[2]),float(parts[3]),int(parts[4])))
     except FileNotFoundError:
-        print(f"Sorry,{FILENAME} not found.")
-    print(f"Loaded {len(projects)} projects from {FILENAME}")
+        print(f"Sorry,{filename} not found.")
+    print(f"Loaded {len(projects)} projects from {filename}")
     return projects
 
 def display_projects(projects):
@@ -86,6 +97,16 @@ def filter_project(projects):
     for project in filter_dates:
         print(project)
 
+def save_projects(projects):
+    filename=input("Please enter filename to save the projects:")
+    if len(filename.strip()) == 0:
+        filename=FILENAME
+    with open(filename,"w") as out_file:
+        print("Name	Start Date	Priority	Cost Estimate	Completion Percentage",file=out_file)
+        for project in projects:
+            print(",".join([project.name,str(project.start_date),str(project.priority),
+                            str(project.estimate_cost),str(project.completed_percentage)]),file=out_file)
+    print(f"{len(projects)} projects have been saved to {filename}.")
 main()
 
 
