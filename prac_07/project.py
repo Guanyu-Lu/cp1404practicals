@@ -1,7 +1,7 @@
 """
 Languages
 Estimate: 20 minutes
-Actual: 18 minutes
+Actual:   20 minutes
 """
 class Project:
     """Represent a Project object."""
@@ -31,3 +31,6 @@ class Project:
         """Define comparison for sorting based on project priority"""
         return self.priority < other.priority
 
+    def get_start_date_for_sort(self):
+        """Return the start_date attribute for use as a sort key."""
+        return self.start_date
