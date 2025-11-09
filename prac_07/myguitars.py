@@ -35,17 +35,36 @@ def add_new_data(guitars):
     """Add new guitars to the list."""
     guitar_name = input("Name: ")
     while guitar_name.strip() != "":
-        guitar_year = get_valid_input("Year: ", int)
-        guitar_cost = get_valid_input("Cost: $", float)
+        guitar_year = get_valid_year()
+        guitar_cost = get_valid_cost()
         guitars.append(Guitar(guitar_name, guitar_year, guitar_cost))
         print(f"{guitar_name} ({guitar_year}) : ${guitar_cost:,.2f} added.\n")
         guitar_name = input("Name: ")
     return guitars
 
 
+def get_valid_cost():
+    """Get valid cost of the guitar."""
+    guitar_cost = get_valid_input("Cost: $", float)
+    while guitar_cost < 0:
+        print("Please enter a positive number for guitar cost.")
+        guitar_cost = get_valid_input("Cost: $", float)
+    return guitar_cost
+
+
+def get_valid_year():
+    """Get valid year of the guitar."""
+    guitar_year = get_valid_input("Year: ", int)
+    while guitar_year < 0 or guitar_year > 2025:
+        print("Invalid year.Please enter a valid year.")
+        guitar_year = get_valid_input("Year: ", int)
+    return guitar_year
+
+
 def get_valid_input(prompt,number_type):
     """Get a valid input from the user."""
     is_valid=False
+    number=0
     while not is_valid:
         try:
             number=number_type(input(prompt))
