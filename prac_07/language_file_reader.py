@@ -6,8 +6,12 @@ File and class example - opens/reads a file, stores in objects of custom class
 
 import csv
 from collections import namedtuple
-
 from prac_07.programming_language import ProgrammingLanguage
+NAME_INDEX=0
+TYPING_INDEX=1
+REFLECTION_INDEX=2
+YEAR_INDEX=3
+POINTER_ARITHMETIC_INDEX=4
 
 
 def main():
@@ -25,12 +29,12 @@ def main():
         parts = line.strip().split(',')
         # print(parts)  # debugging
         # Reflection is stored as a string (Yes/No) and we want a Boolean
-        reflection = parts[2] == "Yes"
+        reflection = parts[REFLECTION_INDEX] == "Yes"
         # pointer arithmetic is stored as a string (Yes/No) and we want a Boolean
-        pointer_arithmetic = parts[4] == "Yes"
+        pointer_arithmetic = parts[POINTER_ARITHMETIC_INDEX] == "Yes"
         # Construct a ProgrammingLanguage object using the elements
         # year should be an int
-        language = ProgrammingLanguage(parts[0], parts[1], reflection, int(parts[3]),pointer_arithmetic)
+        language = ProgrammingLanguage(parts[NAME_INDEX], parts[TYPING_INDEX], reflection, int(parts[YEAR_INDEX]),pointer_arithmetic)
         # Add the language we've just constructed to the list
         languages.append(language)
     # Close the file as soon as we've finished reading it
