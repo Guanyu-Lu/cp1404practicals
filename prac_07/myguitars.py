@@ -85,8 +85,6 @@ def calculate_display_width(guitars):
 def display_guitars(guitars):
     """Display guitars information in list."""
     cost_width, name_width = calculate_display_width(guitars)
-    print("... snip ...\n")
-    print("These are my guitars:")
     for i, guitar in enumerate(guitars, 1):
         vintage_string = " (vintage)" if guitar.is_vintage() else ""
         print(f"Guitar {i}:  {guitar.name:>{name_width}} ({guitar.year:{YEAR_WIDTH}}), "
