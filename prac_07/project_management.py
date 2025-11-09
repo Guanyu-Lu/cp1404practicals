@@ -86,22 +86,26 @@ def update_projects(projects):
     """Select a project and update its completion percentage and priority."""
     for i,project in enumerate(projects,0):
         print(f"{i} {project}")
-    project_choice=get_valid_number("Project choice:",int)
-    if not project_choice <0 or project_choice >= len(projects):
-        print(projects[project_choice])
-        new_percentage = get_valid_value("new percentage",int)
-        new_priority=get_valid_value("new priority",int)
-        projects[project_choice].completed_percentage,projects[project_choice].priority = new_percentage,new_priority
-    else:
-        print("Invalid project number.")
+    try:
+        project_choice=int(input("Project choice:"))
+        if not project_choice <0 or project_choice >= len(projects):
+            print(projects[project_choice])
+            new_percentage =int(input("New percentage:"))
+            if not new_percentage < MINIMUM_VALUE or new_percentage > MAXIMUM_VALUE:
+                projects[project_choice].completed_percentage=new_percentage
+            new_priority=int(input("new priority:"))
+            if not new_priority < MINIMUM_VALUE or new_priority > MAXIMUM_VALUE:
+                projects[project_choice].priority=new_priority
+    except ValueError:
+        print("Invalid number.")
 
 
-def get_valid_value(prompt,number_type):
-    """Get a valid value."""
+def get_valid_input(prompt,number_type):
+    """Get a valid input from the user."""
     value = get_valid_number(prompt,number_type)
     while value < MINIMUM_VALUE or value > MAXIMUM_VALUE:
         print(f"Invalid {prompt}, please try again.")
-        value = get_valid_number(prompt, int)
+        value = get_valid_number(prompt, number_type)
     return value
 
 
@@ -110,9 +114,9 @@ def add_new_projects(projects):
     print("Let's add a new project")
     name=input("Name:")
     start_date_string=input("Start date (dd/mm/yy):")
-    priority=get_valid_value("priority",int)
+    priority=get_valid_input("priority",int)
     estimate_cost = get_valid_estimated_cost()
-    completed_percentage=get_valid_value("Percent complete:",int)
+    completed_percentage=get_valid_input("Percent complete:",int)
     start_date = datetime.datetime.strptime(start_date_string, DATE_FORMAT).date()
     projects.append(Project(name,start_date,priority,estimate_cost,completed_percentage))
 
@@ -140,7 +144,7 @@ def save_projects(projects):
     if len(filename.strip()) == 0:
         filename=FILENAME
     with open(filename,"w") as out_file:
-        print("Name	Start Date	Priority	Cost Estimate	Completion Percentage",file=out_file)
+        print("Name	Start Date\tPriority\tCost Estimate\tCompletion Percentage",file=out_file)
         for project in projects:
             print(",".join([project.name,str(project.start_date),str(project.priority),
                             str(project.estimate_cost),str(project.completed_percentage)]),file=out_file)
@@ -149,6 +153,7 @@ def save_projects(projects):
 def get_valid_number(prompt,number_type):
     """Get a valid number from the user."""
     is_valid=False
+    number=0 #Set the initial value to 0
     while not is_valid:
         try:
             number=number_type(input(f"{prompt.title()}:"))
