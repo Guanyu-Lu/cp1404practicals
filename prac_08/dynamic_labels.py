@@ -6,6 +6,7 @@ NEW_COLOUR = (1, 0, 0, 1)  # RGBA for red
 ALTERNATIVE_COLOUR = (1, 0, 1, 1)  # RGBA for magenta
 
 class DynamicLabelsApp(App):
+    """Main program - Kivy app to demo dynamic labels creation."""
     status_text = StringProperty()
 
     def __init__(self, **kwargs):
@@ -14,14 +15,17 @@ class DynamicLabelsApp(App):
         self.names=["Tom", "Jerry","Steve","Alex"]
 
     def build(self):
+        """Build the Kivy GUI."""
         self.title = "Dynamic Labels"
         self.root = Builder.load_file('dynamic_labels.kv')
         self.create_widgets()
         return self.root
 
     def create_widgets(self):
+        """Create labels from data and add them to the GUI."""
         for name in self.names:
             temp_label=Label(text=name)
             self.root.ids.main.add_widget(temp_label)
+
 
 DynamicLabelsApp().run()
