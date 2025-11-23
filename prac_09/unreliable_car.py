@@ -2,9 +2,10 @@ import random
 from prac_09.car import Car
 
 class UnreliableCar(Car):
-
     """Unreliable car is a car that can only be driven under certain circumstances."""
+
     def __init__(self, name, fuel, reliability):
+        """Initialise an UnreliableCar instance, based on parent class Car."""
         super().__init__(name, fuel)
         self.reliability = reliability
 

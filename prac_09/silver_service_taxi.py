@@ -1,4 +1,5 @@
 from prac_09.taxi import Taxi
+
 class SilverServiceTaxi(Taxi):
     """Represent a SilverServiceTaxi object which is a specialized Taxi."""
 
