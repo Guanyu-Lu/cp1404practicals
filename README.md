@@ -13,7 +13,7 @@ Below are the main lessons learned about writing clean code throughout this subj
 - **Avoid Magic Values:** Use named constants (CONSTANTS) to replace numbers or strings hardcoded directly into the code (Magic Numbers/Values).
 - **Descriptive Naming:** Use meaningful variable and function names to improve code readability.
 - **Docstrings:** Write clear documentation strings for all functions, classes and methods in the codes.
-- 
+
 ## Practical Content
 - [Practical 01](https://github.com/Guanyu-Lu/cp1404practicals/tree/master/prac_01)
 - [Practical 02](https://github.com/Guanyu-Lu/cp1404practicals/tree/master/prac_02)
