@@ -43,7 +43,7 @@ For each one, write a short explanation of what was good about your review.
 
 ### Good Code Review 1
 
-[Pracical 09](https://github.com/ZhengZaikun/cp1404practicals/pull/6?notification_referrer_id=NT_kwDODembabUyMDY0OTg1MjE1NToyMzM0MTM0ODE#pullrequestreview-3498186758)
+[Review for Pracical 09](https://github.com/ZhengZaikun/cp1404practicals/pull/6?notification_referrer_id=NT_kwDODembabUyMDY0OTg1MjE1NToyMzM0MTM0ODE#pullrequestreview-3498186758)
 
 ### Explanation
 
@@ -57,7 +57,7 @@ and not using the assert statement as required in the question to conduct tests.
 
 ### Good Code Review 2
 
-[Pracical 08](https://github.com/ZhengZaikun/cp1404practicals/pull/5?notification_referrer_id=NT_kwDODembabUyMDQ4MDAzMDQ4MToyMzM0MTM0ODE#event-21119644160)
+[Review for Pracical 08](https://github.com/ZhengZaikun/cp1404practicals/pull/5?notification_referrer_id=NT_kwDODembabUyMDQ4MDAzMDQ4MToyMzM0MTM0ODE#event-21119644160)
 
 ### Explanation
 
