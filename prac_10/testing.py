@@ -42,7 +42,7 @@ def run_tests():
     # using the value passed in or the default
     # You should test both of these
 
-    #Test the car fuel
+    # Test the car fuel
     car = Car(fuel=10)
     assert car.fuel == 10, "Car does not set fuel correctly"
 
@@ -62,6 +62,7 @@ def format_phrase_as_sentence(phrase):
         sentence += '.'
 
     return sentence
+
 
 run_tests()
 
